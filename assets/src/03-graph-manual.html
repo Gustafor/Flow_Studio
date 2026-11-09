@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Flow Studio — Graph, manual layout</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .stage { width: 1760px; height: 900px; padding: 24px; }
+  .app { width: 1712px; height: 852px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="app">
+    <div class="titlebar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="titlebar-title"><b>Hermes Desktop</b><span class="titlebar-sep">/</span><span>Flow Studio</span></div>
+      <div class="titlebar-right"><span>desktop plugin</span><span class="kbd">⌘K</span></div>
+    </div>
+
+    <div class="head">
+      <div class="head-row">
+        <div class="select"><span>Маркетинговое исследование</span><span class="caret">▼</span></div>
+        <div class="icon-btn">＋</div>
+        <div class="name-input">Маркетинговое исследование</div>
+        <div class="count">6 шагов</div>
+        <div class="spacer"></div>
+        <div class="lang"><i>EN</i><b>RU</b></div>
+      </div>
+      <div class="tabs">
+        <div class="tab">Редактор</div>
+        <div class="tab active">Граф</div>
+        <div class="tab">JSON</div>
+      </div>
+    </div>
+
+    <div class="launchbar">
+      <div class="iter">Итерации: <span class="box">1</span></div>
+      <div class="spacer"></div>
+      <div class="btn">Скопировать бриф запуска</div>
+      <div class="btn btn-primary"><span class="play">▶</span>Запустить агента</div>
+    </div>
+
+    <div class="graph-wrap">
+      <div class="canvas" id="canvas">
+        <div class="zoom"><b>⟲</b><span class="divider"></span><b>−</b><i>115%</i><b>＋</b><b>1</b></div>
+      </div>
+      <div class="legend">
+        <span><i class="dot" style="background:#4f9cff"></i>Агент</span>
+        <span><i class="dot" style="background:#f0a020"></i>Шлюз «исключительный»</span>
+        <span><i class="dot" style="background:#3ecf8e"></i>Вывод</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="graph.js"></script>
+<script>
+  const nodes = [
+    { id: 's1', type: 'agent', name: 'Сбор данных', x: 28, y: 105 },
+    { id: 's2', type: 'agent', name: 'Анализ и SWOT', x: 312, y: 105 },
+    { id: 'g1', type: 'exclusive', name: 'Бюджет?', x: 294, y: 113 },
+    { id: 's3a', type: 'agent', name: 'План запуска (полный)', x: 518, y: 10 },
+    { id: 's3b', type: 'agent', name: 'План запуска (минимальный)', x: 632, y: 158 },
+    { id: 's4', type: 'output', name: 'Отчёт', x: 898, y: 190 },
+  ];
+  const edges = [
+    { from: 's1', to: 's2' },
+    { from: 's2', to: 'g1' },
+    { from: 'g1', to: 's3a', label: 'Бюджет есть' },
+    { from: 'g1', to: 's3b', label: 'Ограничен' },
+    { from: 'g1', to: 's4', label: 'по умолчанию' },
+  ];
+  const canvas = document.getElementById('canvas');
+  const zoom = 1.15;
+  const gw = 1126, gh = 280;
+  const ox = (canvas.clientWidth - gw * zoom) / 2;
+  const oy = (canvas.clientHeight - gh * zoom) / 2;
+  renderGraph(canvas, nodes, edges, { zoom, ox, oy });
+</script>
+</body>
+</html>

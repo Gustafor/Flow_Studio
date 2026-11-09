@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flow Studio — social preview</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .stage { width: 1280px; height: 640px; }
+  .copy { position: absolute; left: 64px; top: 64px; width: 540px; z-index: 5; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 44px; height: 44px; }
+  .brand .wm { font-size: 22px; font-weight: 700; letter-spacing: -0.025em; }
+  .brand .wm span { color: var(--text-3); font-weight: 500; }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 26px;
+    padding: 0 10px;
+    border: 1px solid var(--stroke-2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text-3);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px rgba(62, 207, 142, 0.8); }
+  h1 {
+    margin: 26px 0 0;
+    font-size: 47px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 750;
+  }
+  h1 .grad {
+    background: linear-gradient(92deg, #6cb4ff 0%, #7db7ff 38%, #3ecf8e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .sub {
+    margin-top: 18px;
+    max-width: 470px;
+    color: var(--text-2);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .sub b { color: var(--text); font-weight: 600; }
+  .pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 26px; }
+  .pills .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 27px;
+    padding: 0 9px;
+    border: 1px solid var(--stroke);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.022);
+    color: var(--text-3);
+    font-size: 10.5px;
+  }
+  .pills .tag i { width: 5px; height: 5px; border-radius: 50%; }
+  .foot {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-4);
+    font-size: 10.5px;
+    letter-spacing: 0.02em;
+  }
+  .foot .mono { color: var(--text-3); }
+
+  .shot { left: 620px; top: 70px; width: 742px; height: 500px; }
+  .shot-canvas { background-size: 20px 20px; }
+  .glow {
+    position: absolute;
+    left: 760px;
+    top: 130px;
+    width: 620px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(79, 156, 255, 0.20), rgba(79, 156, 255, 0));
+    filter: blur(18px);
+    pointer-events: none;
+  }
+  .glow.green {
+    left: 990px;
+    top: 330px;
+    width: 420px;
+    height: 320px;
+    background: radial-gradient(closest-side, rgba(62, 207, 142, 0.16), rgba(62, 207, 142, 0));
+  }
+  .chip.xor { top: 344px; left: 1012px; }
+  .chip.saved { top: 512px; left: 644px; }
+  .chip.oneclick { top: 512px; left: 1090px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="glow"></div>
+  <div class="glow green"></div>
+
+  <div class="copy">
+    <div class="brand">
+      <img src="../logo.svg" alt="">
+      <div class="wm">Flow Studio <span>· Hermes Desktop</span></div>
+    </div>
+
+    <div style="margin-top:22px"><span class="pill"><span class="dot"></span>AI agent workflow builder</span></div>
+
+    <h1>Build multi-agent<br>pipelines as a <span class="grad">graph.</span></h1>
+
+    <div class="sub">Agents, <b>XOR / AND gateways</b> and outputs — wired into a DAG.<br>Drag the blocks, hit launch, and the whole pipeline runs in your chat.</div>
+
+    <div class="pills">
+      <span class="tag"><i style="background:#4f9cff"></i>Single plugin.js</span>
+      <span class="tag"><i style="background:#b18cff"></i>No build step</span>
+      <span class="tag"><i style="background:#3ecf8e"></i>MIT</span>
+      <span class="tag"><i style="background:#f0a020"></i>EN / RU</span>
+    </div>
+
+    <div class="foot">One click → <span class="mono">prompt.submit</span> → active Hermes session</div>
+  </div>
+
+  <div class="shot">
+    <div class="shot-head">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="shot-title"><b>Flow Studio</b><span class="slash">/</span><span>Маркетинговое исследование</span></div>
+      <div class="spacer"></div>
+      <div class="mini-badge"><span class="dot" style="width:5px;height:5px;border-radius:50%;background:#3ecf8e"></span>desktop plugin</div>
+    </div>
+    <div class="shot-tabs">
+      <div class="shot-tab">Редактор</div>
+      <div class="shot-tab on">Граф</div>
+      <div class="shot-tab">JSON</div>
+    </div>
+    <div class="shot-launch">
+      <span>Итерации:</span><span class="box">1</span>
+      <span class="spacer"></span>
+      <span class="ghost">Скопировать бриф</span>
+      <span class="go"><span>▶</span>Запустить агента</span>
+    </div>
+    <div class="shot-canvas" id="canvas">
+      <div class="shot-zoom"><b>⟲</b><span class="d"></span><b>−</b><i>78%</i><b>＋</b><b>1</b></div>
+    </div>
+    <div class="shot-legend">
+      <span><i style="background:#4f9cff"></i>Агент</span>
+      <span><i style="background:#f0a020"></i>XOR-шлюз</span>
+      <span><i style="background:#3ecf8e"></i>Вывод</span>
+    </div>
+  </div>
+
+  <div class="chip orange xor"><span class="dot" style="background:#f0a020"></span><b>XOR</b> · 3 ветки</div>
+  <div class="chip blue saved"><span class="dot" style="background:#4f9cff"></span>раскладка сохранена</div>
+  <div class="chip green oneclick"><span class="dot" style="background:#3ecf8e"></span><b>1 click</b> launch</div>
+</div>
+
+<script src="graph.js"></script>
+<script>
+  const nodes = [
+    { id: 's1', type: 'agent', name: 'Сбор данных', x: 28, y: 105 },
+    { id: 's2', type: 'agent', name: 'Анализ и SWOT', x: 312, y: 105 },
+    { id: 'g1', type: 'exclusive', name: 'Бюджет?', x: 596, y: 105 },
+    { id: 's3a', type: 'agent', name: 'План запуска (полный)', x: 880, y: 28 },
+    { id: 's3b', type: 'agent', name: 'План запуска (минимальный)', x: 880, y: 120 },
+    { id: 's4', type: 'output', name: 'Отчёт', x: 880, y: 212 },
+  ];
+  const edges = [
+    { from: 's1', to: 's2' },
+    { from: 's2', to: 'g1' },
+    { from: 'g1', to: 's3a', label: 'Бюджет есть' },
+    { from: 'g1', to: 's3b', label: 'Ограничен' },
+    { from: 'g1', to: 's4', label: 'по умолчанию' },
+  ];
+  const canvas = document.getElementById('canvas');
+  const zoom = 0.78;
+  const ox = -100;
+  const oy = (canvas.clientHeight - 302 * zoom) / 2 + 4;
+  renderGraph(canvas, nodes, edges, { zoom, ox, oy });
+</script>
+</body>
+</html>

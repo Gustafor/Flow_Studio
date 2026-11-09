@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Flow Studio — Editor</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .stage { width: 1760px; height: 1020px; padding: 24px; }
+  .app { width: 1712px; height: 972px; }
+  .detail { padding-right: 30px; }
+  .type-btn { padding: 0 9px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="app">
+    <div class="titlebar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="titlebar-title"><b>Hermes Desktop</b><span class="titlebar-sep">/</span><span>Flow Studio</span></div>
+      <div class="titlebar-right"><span>desktop plugin</span><span class="kbd">⌘K</span></div>
+    </div>
+
+    <div class="head">
+      <div class="head-row">
+        <div class="select"><span>Пайплайн ревью кода</span><span class="caret">▼</span></div>
+        <div class="icon-btn">＋</div>
+        <div class="name-input">Пайплайн ревью кода</div>
+        <div class="count">8 шагов</div>
+        <div class="spacer"></div>
+        <div class="lang"><i>EN</i><b>RU</b></div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Редактор</div>
+        <div class="tab">Граф</div>
+        <div class="tab">JSON</div>
+      </div>
+    </div>
+
+    <div class="editor">
+      <div class="steps-pane">
+        <div class="steps-list">
+          <div class="step-row"><span class="dot" style="background:#4f9cff"></span><span class="nm">Ввод: код для ревью</span></div>
+          <div class="step-row"><span class="dot" style="background:#b18cff"></span><span class="nm">Параллельный разбор</span></div>
+          <div class="step-row"><span class="dot" style="background:#4f9cff"></span><span class="nm">Безопасность</span></div>
+          <div class="step-row"><span class="dot" style="background:#4f9cff"></span><span class="nm">Архитектура и стиль</span></div>
+          <div class="step-row"><span class="dot" style="background:#4f9cff"></span><span class="nm">Производительность</span></div>
+          <div class="step-row"><span class="dot" style="background:#b18cff"></span><span class="nm">Слияние</span></div>
+          <div class="step-row active"><span class="dot" style="background:#4f9cff"></span><span class="nm">Финальное решение</span></div>
+          <div class="step-row"><span class="dot" style="background:#3ecf8e"></span><span class="nm">Вердикт ревью</span></div>
+        </div>
+        <div class="add-pane">
+          <div class="add-btn"><span class="dot" style="background:#4f9cff"></span>Агент</div>
+          <div class="add-btn"><span class="dot" style="background:#f0a020"></span>Шлюз «исключительный»</div>
+          <div class="add-btn"><span class="dot" style="background:#b18cff"></span>Шлюз «параллельный»</div>
+          <div class="add-btn"><span class="dot" style="background:#3ecf8e"></span>Вывод</div>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="field">
+          <div class="label">Имя шага</div>
+          <div class="input">Финальное решение</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Тип <span class="dim">— тип определяет, что происходит, когда поток доходит до шага.</span></div>
+          <div class="type-grid">
+            <div class="type-btn on"><span class="dot" style="background:#4f9cff"></span>Агент</div>
+            <div class="type-btn"><span class="dot" style="background:#f0a020"></span>Шлюз «исключительный»</div>
+            <div class="type-btn"><span class="dot" style="background:#b18cff"></span>Шлюз «параллельный»</div>
+            <div class="type-btn"><span class="dot" style="background:#3ecf8e"></span>Вывод</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="desc">Задача: агент (LLM) работает по системному промпту с выбранными инструментами; его результат подставляется в другие шаги как <span style="color:#7db7ff">{{Имя шага}}</span>.</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Системный промпт</div>
+          <div class="area sys">Лид команды. На входе — три независимых ревью. Вынеси вердикт: approve / request changes / reject, приоритизированный список правок (max 8), что обязательно исправить до мержа.</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Роли</div>
+          <div class="input">Лид команды</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Шаблон входа</div>
+          <div class="area inp">Безопасность: {{Безопасность}}
+Архитектура: {{Архитектура и стиль}}
+Производительность: {{Производительность}}</div>
+          <div class="hint"><code>{{Имя шага}}</code> — подставляет результат другого шага.</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Инструменты</div>
+          <div class="checks">
+            <div class="check"><span class="box-check on">✓</span>read</div>
+            <div class="check"><span class="box-check">✓</span>write</div>
+            <div class="check"><span class="box-check">✓</span>web_search</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Запускается после (зависимости)</div>
+          <div class="dep"><span class="box-check on">✓</span>Слияние<span class="kind parallel">Шлюз «параллельный»</span></div>
+          <div class="dep"><span class="box-check">✓</span>Вердикт ревью<span class="kind output">Вывод</span></div>
+          <div class="dep"><span class="box-check">✓</span>Безопасность<span class="kind agent">Агент</span></div>
+          <div class="dep"><span class="box-check">✓</span>Ввод: код для ревью<span class="kind agent">Агент</span></div>
+        </div>
+
+        <div class="delete">Удалить шаг</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

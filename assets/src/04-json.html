@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Flow Studio — JSON</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .stage { width: 1760px; height: 1020px; padding: 24px; }
+  .app { width: 1712px; height: 972px; }
+  .json-area { position: relative; white-space: normal; }
+  .scrollbar {
+    position: absolute;
+    top: 10px;
+    right: 6px;
+    bottom: 10px;
+    width: 3px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .scrollbar i {
+    position: absolute;
+    left: 0;
+    top: 46%;
+    width: 3px;
+    height: 92px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  .json-area .line { display: block; height: 18.6px; }
+  .json-area .ind1 { padding-left: 22px; }
+  .json-area .ind2 { padding-left: 44px; }
+  .json-area .ind3 { padding-left: 66px; }
+  .view-band {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 237px;
+    height: 278px;
+    background: linear-gradient(90deg, rgba(240, 160, 32, 0.055), rgba(240, 160, 32, 0.015));
+    border-left: 2px solid rgba(240, 160, 32, 0.5);
+    pointer-events: none;
+  }
+  .view-tag {
+    position: absolute;
+    right: 16px;
+    top: 250px;
+    padding: 5px 8px;
+    border: 1px solid rgba(240, 160, 32, 0.35);
+    border-radius: 6px;
+    background: rgba(28, 21, 9, 0.92);
+    color: #f0b45a;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="app">
+    <div class="titlebar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="titlebar-title"><b>Hermes Desktop</b><span class="titlebar-sep">/</span><span>Flow Studio</span></div>
+      <div class="titlebar-right"><span>desktop plugin</span><span class="kbd">⌘K</span></div>
+    </div>
+
+    <div class="head">
+      <div class="head-row">
+        <div class="select"><span>Маркетинговое исследование</span><span class="caret">▼</span></div>
+        <div class="icon-btn">＋</div>
+        <div class="name-input">Маркетинговое исследование</div>
+        <div class="count">6 шагов</div>
+        <div class="spacer"></div>
+        <div class="lang"><i>EN</i><b>RU</b></div>
+      </div>
+      <div class="tabs">
+        <div class="tab">Редактор</div>
+        <div class="tab">Граф</div>
+        <div class="tab active">JSON</div>
+      </div>
+    </div>
+
+    <div class="json-body">
+      <div class="json-top">
+        <div>
+          <div class="json-title">JSON потока</div>
+          <div class="json-hint">Копируйте, скачивайте файлом или вставьте JSON ниже для импорта.</div>
+        </div>
+        <div class="spacer"></div>
+        <div class="btn">Копировать JSON</div>
+        <div class="btn">Скачать .json</div>
+      </div>
+
+      <div class="json-area"><div class="view-band"></div><div class="scrollbar"><i></i></div>
+<span class="line ind1"><span class="p">"s4": {</span></span>
+<span class="line ind2"><span class="k">"id"</span><span class="p">: </span><span class="s">"s4"</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"type"</span><span class="p">: </span><span class="s">"output"</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"name"</span><span class="p">: </span><span class="s">"Отчёт"</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"systemPrompt"</span><span class="p">: </span><span class="s">""</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"inputTemplate"</span><span class="p">: </span><span class="s">""</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"roles"</span><span class="p">: </span><span class="s">""</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"tools"</span><span class="p">: [],</span></span>
+<span class="line ind2"><span class="k">"format"</span><span class="p">: </span><span class="s">"md"</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"outputInstruction"</span><span class="p">: </span><span class="s">"Собери финальный отчёт: SWOT, план запуска (полный или минимальный), список рисков и следующий шаг."</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"attach"</span><span class="p">: [</span><span class="s">"s2"</span><span class="p">, </span><span class="s">"s3a"</span><span class="p">, </span><span class="s">"s3b"</span><span class="p">],</span></span>
+<span class="line ind2"><span class="k">"after"</span><span class="p">: [</span><span class="s">"g1"</span><span class="p">]</span></span>
+<span class="line ind1"><span class="p">},</span></span>
+<span class="line ind1"><span class="hl">"view"</span><span class="p">: {</span></span>
+<span class="line ind2"><span class="k">"offsets"</span><span class="p">: {</span></span>
+<span class="line ind3"><span class="k">"s3a"</span><span class="p">: { </span><span class="k">"dx"</span><span class="p">: </span><span class="n">-78</span><span class="p">, </span><span class="k">"dy"</span><span class="p">: </span><span class="n">-18</span><span class="p"> },</span></span>
+<span class="line ind3"><span class="k">"s3b"</span><span class="p">: { </span><span class="k">"dx"</span><span class="p">: </span><span class="n">36</span><span class="p">, </span><span class="k">"dy"</span><span class="p">: </span><span class="n">38</span><span class="p"> },</span></span>
+<span class="line ind3"><span class="k">"s4"</span><span class="p">: { </span><span class="k">"dx"</span><span class="p">: </span><span class="n">18</span><span class="p">, </span><span class="k">"dy"</span><span class="p">: </span><span class="n">-22</span><span class="p"> }</span></span>
+<span class="line ind2"><span class="p">},</span></span>
+<span class="line ind2"><span class="k">"zoom"</span><span class="p">: </span><span class="n">1.15</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"scrollX"</span><span class="p">: </span><span class="n">0</span><span class="p">,</span></span>
+<span class="line ind2"><span class="k">"scrollY"</span><span class="p">: </span><span class="n">0</span></span>
+<span class="line ind1"><span class="p">}</span></span>
+<span class="line"><span class="p">}</span></span>
+        <div class="view-tag">раскладка сохранена вместе с потоком</div>
+      </div>
+
+      <div class="import">
+        <div class="label">Импорт из вставки</div>
+        <div class="area"></div>
+        <div class="import-row">
+          <div class="btn">Импорт из вставки</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

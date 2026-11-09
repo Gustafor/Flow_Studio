@@ -1,0 +1,131 @@
+{
+  "name": "Производство контента",
+  "iterations": 1,
+  "steps": {
+    "s1": {
+      "id": "s1",
+      "type": "agent",
+      "name": "Выбор темы",
+      "systemPrompt": "Редактор. Предложи 5 тем под ЦА: {{ЦА}}. Выбери 1 сильнейшую и обоснуй в 2 предложениях.",
+      "inputTemplate": "Ниша: {{Ниша}}\nЦА: {{ЦА}}",
+      "roles": "",
+      "tools": [
+        "read",
+        "web_search"
+      ],
+      "after": []
+    },
+    "s2": {
+      "id": "s2",
+      "type": "agent",
+      "name": "Черновик",
+      "systemPrompt": "Копирайтер. Напиши черновик статьи (800–1200 слов) с подзаголовками H2, без воды, с одним примером из практики.",
+      "inputTemplate": "Тема и обоснование:\n{{Выбор темы}}",
+      "roles": "",
+      "tools": [
+        "read"
+      ],
+      "after": [
+        "s1"
+      ]
+    },
+    "g1": {
+      "id": "g1",
+      "type": "exclusive",
+      "name": "Одобрено редактором?",
+      "systemPrompt": "",
+      "inputTemplate": "",
+      "roles": "",
+      "tools": [],
+      "branches": [
+        {
+          "id": "b1",
+          "target": "s3",
+          "condition": "Черновик опубликован",
+          "isDefault": false
+        },
+        {
+          "id": "b2",
+          "target": "s2r",
+          "condition": "Нужна доработка",
+          "isDefault": false
+        },
+        {
+          "id": "b3",
+          "target": "s5",
+          "condition": "Отклонено, тема не работает",
+          "isDefault": true
+        }
+      ],
+      "after": [
+        "s2"
+      ]
+    },
+    "s2r": {
+      "id": "s2r",
+      "type": "agent",
+      "name": "Доработка",
+      "systemPrompt": "Копирайтер. Перепиши черновик, убрав слабые места: слишком длинный интро, отсутствие примера, размытый вывод.",
+      "inputTemplate": "Черновик:\n{{Черновик}}",
+      "roles": "",
+      "tools": [
+        "read"
+      ],
+      "after": [
+        "g1"
+      ]
+    },
+    "s3": {
+      "id": "s3",
+      "type": "agent",
+      "name": "SEO и метаданные",
+      "systemPrompt": "SEO-специалист. Подбери title (<= 60 символов), description (<= 160), 5 ключевых слов, URL-slug.",
+      "inputTemplate": "Статья:\n{{Доработка}}",
+      "roles": "",
+      "tools": [
+        "web_search"
+      ],
+      "after": [
+        "s2r"
+      ]
+    },
+    "s4": {
+      "id": "s4",
+      "type": "agent",
+      "name": "Оглавление и CTA",
+      "systemPrompt": "Редактор. Добавь главу-оглавление, 1 CTA в конце, проверял факт-чек (2-3 самых спорных утверждения).",
+      "inputTemplate": "Статья с SEO:\n{{SEO и метаданные}}",
+      "roles": "",
+      "tools": [
+        "read"
+      ],
+      "after": [
+        "s3"
+      ]
+    },
+    "s5": {
+      "id": "s5",
+      "type": "output",
+      "name": "Готовый материал",
+      "systemPrompt": "",
+      "inputTemplate": "",
+      "roles": "",
+      "tools": [],
+      "format": "md",
+      "outputInstruction": "Публикационный пакет: статья (MD), title, description, ключи, slug, CTA. Если статья отклонена — краткий вердикт редактора вместо пакета.",
+      "attach": [
+        "s4"
+      ],
+      "after": [
+        "s4",
+        "g1"
+      ]
+    }
+  },
+  "view": {
+    "offsets": {},
+    "zoom": 1,
+    "scrollX": 0,
+    "scrollY": 0
+  }
+}

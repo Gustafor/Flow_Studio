@@ -1,0 +1,117 @@
+{
+  "name": "Маркетинговое исследование",
+  "iterations": 1,
+  "steps": {
+    "s1": {
+      "id": "s1",
+      "type": "agent",
+      "name": "Сбор данных",
+      "systemPrompt": "Ты — аналитик рынка. Ищешь информацию о товаре, ценах конкурентов и отзывах клиентов. Формулируй факты, указывай источники.",
+      "inputTemplate": "Исследуй тему: {{Тема}}.\nСобери: 5 ключевых конкурентов, ценовой диапазон, основные боли клиентов.",
+      "roles": "Аналитик",
+      "tools": [
+        "read",
+        "write",
+        "web_search"
+      ],
+      "after": []
+    },
+    "s2": {
+      "id": "s2",
+      "type": "agent",
+      "name": "Анализ и SWOT",
+      "systemPrompt": "Ты — стратег. На входе — сырые данные, на выходе — SWOT-анализ и 3 ключевых вывода с обоснованием.",
+      "inputTemplate": "Данные исследования:\n{{Сбор данных}}",
+      "roles": "Стратег",
+      "tools": [
+        "read"
+      ],
+      "after": [
+        "s1"
+      ]
+    },
+    "g1": {
+      "id": "g1",
+      "type": "exclusive",
+      "name": "Бюджет?",
+      "systemPrompt": "",
+      "inputTemplate": "",
+      "roles": "",
+      "tools": [],
+      "branches": [
+        {
+          "id": "b1",
+          "target": "s3a",
+          "condition": "Бюджет на запуск есть (>= 50 000)",
+          "isDefault": false
+        },
+        {
+          "id": "b2",
+          "target": "s3b",
+          "condition": "Бюджет ограничен / нет",
+          "isDefault": false
+        },
+        {
+          "id": "b3",
+          "target": "s4",
+          "condition": "",
+          "isDefault": true
+        }
+      ],
+      "after": [
+        "s2"
+      ]
+    },
+    "s3a": {
+      "id": "s3a",
+      "type": "agent",
+      "name": "План запуска (полный)",
+      "systemPrompt": "Составь 30-дневный план запуска с бюджетами по каналам и KPI.",
+      "inputTemplate": "SWOT: {{Анализ и SWOT}}\nБюджет: достаточный.",
+      "roles": "",
+      "tools": [
+        "read",
+        "write"
+      ],
+      "after": []
+    },
+    "s3b": {
+      "id": "s3b",
+      "type": "agent",
+      "name": "План запуска (минимальный)",
+      "systemPrompt": "Составь план запуска на 10 000: 1 канал, 1 оффер, 1 метрика успеха.",
+      "inputTemplate": "SWOT: {{Анализ и SWOT}}\nБюджет: минимальный (10 000).",
+      "roles": "",
+      "tools": [
+        "read",
+        "write"
+      ],
+      "after": []
+    },
+    "s4": {
+      "id": "s4",
+      "type": "output",
+      "name": "Отчёт",
+      "systemPrompt": "",
+      "inputTemplate": "",
+      "roles": "",
+      "tools": [],
+      "format": "md",
+      "outputInstruction": "Собери финальный отчёт: SWOT, план запуска (полный или минимальный), список рисков и следующий шаг.",
+      "attach": [
+        "s2",
+        "s3a",
+        "s3b"
+      ],
+      "after": [
+        "g1"
+      ]
+    }
+  },
+  "view": {
+    "offsets": {},
+    "zoom": 1,
+    "scrollX": 0,
+    "scrollY": 0
+  }
+}
